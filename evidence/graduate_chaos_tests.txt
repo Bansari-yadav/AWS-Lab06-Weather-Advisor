@@ -1,0 +1,117 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.3, pytest-9.2.0, pluggy-1.7.0 -- D:\Work - 2026\python\lab06\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: D:\Work - 2026\python\lab06
+configfile: pytest.ini
+collecting ... collected 2 items
+
+tests/chaos/test_weather_chaos.py::test_database_failure_preserves_weather_and_restores_access Database access temporarily blocked.
+Restart weather in the AWS browser terminal, then return HERE and press Enter: {
+  "weather_during_outage": {
+    "status": 200,
+    "body": {
+      "zip": "60616",
+      "city": "Chicago",
+      "state": "IL",
+      "latitude": "41.8426",
+      "longitude": "-87.6306",
+      "forecast": {
+        "name": "Tonight",
+        "temperature": 50,
+        "temperatureUnit": "F",
+        "shortForecast": "Clear",
+        "windSpeed": "5 mph",
+        "precipitationChance": 0,
+        "isDaytime": false
+      },
+      "cache": "unavailable"
+    }
+  },
+  "history_during_outage": {
+    "status": 503,
+    "body": {
+      "error": "database_unavailable"
+    }
+  }
+}
+Collect the db_error log in the browser terminal, then return HERE and press Enter to restore access: Database rule restored. Waiting 35 seconds...
+AFTER RESTORATION:
+{
+  "status": 200,
+  "body": {
+    "zip": "60616",
+    "city": "Chicago",
+    "state": "IL",
+    "latitude": "41.8426",
+    "longitude": "-87.6306",
+    "forecast": {
+      "name": "Tonight",
+      "temperature": 50,
+      "temperatureUnit": "F",
+      "shortForecast": "Clear",
+      "windSpeed": "5 mph",
+      "precipitationChance": 0,
+      "isDaytime": false
+    },
+    "cache": "miss"
+  }
+}
+PASSED
+tests/chaos/test_weather_chaos.py::test_weather_failure_returns_502_and_recovers_within_300_seconds Weather instance termination requested: i-08cc1bf153ff4c3f8
+WEATHER: {"seconds": 0.1, "status": 200}
+WEATHER: {"seconds": 5.2, "status": 503}
+ADVISOR: {"seconds": 5.3, "advice_status": 502, "advice_error": "weather_service_unavailable", "homepage_status": 200}
+WEATHER: {"seconds": 10.4, "status": 503}
+ADVISOR: {"seconds": 11.1, "advice_status": 502, "advice_error": "weather_service_unavailable", "homepage_status": 200}
+WEATHER: {"seconds": 18.9, "status": 502}
+ADVISOR: {"seconds": 24.0, "advice_status": 502, "advice_error": "weather_service_unavailable", "homepage_status": 200}
+WEATHER: {"seconds": 24.3, "status": 502}
+ADVISOR: {"seconds": 29.4, "advice_status": 502, "advice_error": "weather_service_unavailable", "homepage_status": 200}
+WEATHER: {"seconds": 29.5, "status": 502}
+WEATHER: {"seconds": 35.1, "status": 502}
+ADVISOR: {"seconds": 35.3, "advice_status": 502, "advice_error": "weather_service_unavailable", "homepage_status": 200}
+WEATHER: {"seconds": 40.3, "status": 502}
+ADVISOR: {"seconds": 41.5, "advice_status": 502, "advice_error": "weather_service_unavailable", "homepage_status": 200}
+WEATHER: {"seconds": 45.5, "status": 502}
+ADVISOR: {"seconds": 46.6, "advice_status": 502, "advice_error": "weather_service_unavailable", "homepage_status": 200}
+WEATHER: {"seconds": 50.6, "status": 502}
+ADVISOR: {"seconds": 51.8, "advice_status": 502, "advice_error": "weather_service_unavailable", "homepage_status": 200}
+WEATHER: {"seconds": 55.9, "status": 502}
+ADVISOR: {"seconds": 58.6, "advice_status": 502, "advice_error": "weather_service_unavailable", "homepage_status": 200}
+WEATHER: {"seconds": 61.6, "status": 502}
+ADVISOR: {"seconds": 64.7, "advice_status": 502, "advice_error": "weather_service_unavailable", "homepage_status": 200}
+WEATHER: {"seconds": 67.2, "status": 502}
+ADVISOR: {"seconds": 71.0, "advice_status": 502, "advice_error": "weather_service_unavailable", "homepage_status": 200}
+WEATHER: {"seconds": 72.6, "status": 502}
+ADVISOR: {"seconds": 77.7, "advice_status": 200, "advice_error": null, "homepage_status": 200}
+WEATHER: {"seconds": 77.7, "status": 200}
+
+RECOVERY SUMMARY
+{
+  "terminated_instance": "i-08cc1bf153ff4c3f8",
+  "replacement_instances": [
+    "i-014ba1f0fd3191463"
+  ],
+  "recovery_seconds": 77.7,
+  "recovered_within_300_seconds": true,
+  "post_recovery_cache": "hit"
+}
+PASS: weather returns a forecast HTTP 200
+PASS: repeat request is a cache hit HTTP 200
+PASS: history contains saved lookups HTTP 200
+PASS: weather rejects invalid ZIP HTTP 400
+PASS: weather rejects unknown ZIP HTTP 404
+PASS: advisor returns advice HTTP 200
+PASS: advice comes from Gemini 
+Source: gemini
+Advice: Wear a light jacket or a sweater to stay comfortable in the cool evening air. You will not need rain gear since the sky will be clear.
+PASS: advisor rejects invalid ZIP HTTP 400
+PASS: advisor homepage loads HTTP 200
+
+9 of 9 checks passed
+Advisor page: http://itmo-444-544-weather-alb-33139536.us-east-2.elb.amazonaws.com:8081/
+
+
+PASSED
+
+======================== 2 passed in 684.61s (0:11:24) ========================

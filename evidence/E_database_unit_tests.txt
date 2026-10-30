@@ -1,0 +1,15 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.3, pytest-9.2.0, pluggy-1.7.0 -- D:\Work - 2026\python\lab06\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: D:\Work - 2026\python\lab06
+configfile: pytest.ini
+collecting ... collected 6 items
+
+tests/unit/test_weather_database.py::test_database_required_settings PASSED [ 16%]
+tests/unit/test_weather_database.py::test_database_security_group_has_only_app_source PASSED [ 33%]
+tests/unit/test_weather_database.py::test_database_create_twice_has_no_duplicates PASSED [ 50%]
+tests/unit/test_weather_database.py::test_database_delete_removes_resources_and_is_repeatable PASSED [ 66%]
+tests/unit/test_weather_database.py::test_database_secret_not_written_or_printed PASSED [ 83%]
+tests/unit/test_weather_database.py::test_database_request_uses_configured_class PASSED [100%]
+
+============================== 6 passed in 9.41s ==============================

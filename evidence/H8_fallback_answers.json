@@ -1,0 +1,20 @@
+[
+  {
+    "attempt": 1,
+    "status": 200,
+    "source": "fallback",
+    "advice": "Wear a warm jacket and long pants."
+  },
+  {
+    "attempt": 2,
+    "status": 200,
+    "source": "fallback",
+    "advice": "Wear a warm jacket and long pants."
+  },
+  {
+    "attempt": 3,
+    "status": 200,
+    "source": "fallback",
+    "advice": "Wear a warm jacket and long pants."
+  }
+]

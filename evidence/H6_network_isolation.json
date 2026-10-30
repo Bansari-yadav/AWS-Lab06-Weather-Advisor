@@ -1,0 +1,12 @@
+[
+  {
+    "tier": "weather",
+    "direct": "blocked: ConnectTimeout",
+    "through_ALB_status": 200
+  },
+  {
+    "tier": "advisor",
+    "direct": "blocked: ConnectTimeout",
+    "through_ALB_status": 200
+  }
+]

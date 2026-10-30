@@ -1,0 +1,5 @@
+{
+  "result": "no connection",
+  "error_type": "TimeoutError",
+  "detail": "timed out"
+}

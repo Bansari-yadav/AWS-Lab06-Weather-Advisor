@@ -1,0 +1,1 @@
+The ZIP lookup API converts a ZIP code into coordinates, the NWS points endpoint provides the forecast URL for those coordinates, and that URL is requested to retrieve the forecast; this uses two API providers and three HTTP requests on a cache miss.

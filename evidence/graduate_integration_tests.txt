@@ -1,0 +1,19 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.3, pytest-9.2.0, pluggy-1.7.0 -- D:\Work - 2026\python\lab06\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: D:\Work - 2026\python\lab06
+configfile: pytest.ini
+collecting ... collected 10 items
+
+tests/integration/test_weather_live.py::test_both_target_groups_healthy PASSED [ 10%]
+tests/integration/test_weather_live.py::test_forecast_miss_then_hit_and_history PASSED [ 20%]
+tests/integration/test_weather_live.py::test_weather_error_statuses[abc-400] PASSED [ 30%]
+tests/integration/test_weather_live.py::test_weather_error_statuses[00000-404] PASSED [ 40%]
+tests/integration/test_weather_live.py::test_all_nine_smoke_checks PASSED [ 50%]
+tests/integration/test_weather_live.py::test_application_access_only_through_alb[weather] PASSED [ 60%]
+tests/integration/test_weather_live.py::test_application_access_only_through_alb[advisor] PASSED [ 70%]
+tests/integration/test_weather_live.py::test_database_port_unreachable_from_computer PASSED [ 80%]
+tests/integration/test_weather_live.py::test_each_role_reads_only_its_own_secret PASSED [ 90%]
+tests/integration/test_weather_live.py::test_database_tls_and_backup_configuration PASSED [100%]
+
+============================= 10 passed in 24.36s =============================

@@ -1,0 +1,14 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.3, pytest-9.2.0, pluggy-1.7.0 -- D:\Work - 2026\python\lab06\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: D:\Work - 2026\python\lab06
+configfile: pytest.ini
+collecting ... collected 5 items
+
+tests/unit/test_weather_stack.py::test_roles_have_separate_secret_policies PASSED [ 20%]
+tests/unit/test_weather_stack.py::test_user_data_under_16kb_and_secret_free[weather] PASSED [ 40%]
+tests/unit/test_weather_stack.py::test_user_data_under_16kb_and_secret_free[advisor] PASSED [ 60%]
+tests/unit/test_weather_stack.py::test_launch_template_create_twice_has_one_version PASSED [ 80%]
+tests/unit/test_weather_stack.py::test_stack_order_repeat_creation_and_cleanup PASSED [100%]
+
+============================== 5 passed in 9.60s ==============================

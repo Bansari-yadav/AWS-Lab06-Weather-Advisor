@@ -1,0 +1,83 @@
+lab06/
+  .env
+  .env.example
+  .gitignore
+  advisor-app/
+  cleanup_remaining.py
+  collect_readonly_evidence.py
+  create_database.py
+  create_weather_stack.py
+  delete_database.py
+  delete_weather_stack.py
+  docs/
+  evidence/
+  experiment_database_failure.py
+  experiment_gemini_failure.py
+  experiment_weather_recovery.py
+  lab03/
+  part_f_helpers.txt
+  previous/
+  pytest.ini
+  README.md
+  requirements.txt
+  stack/
+  store_gemini_key.py
+  SUBMISSION_NOTES.md
+  test_gemini_key.py
+  testing/
+  tests/
+  verify_cleanup.py
+  weather-app/
+
+lab06/advisor-app/
+  app.js
+  package-lock.json
+  package.json
+
+lab06/weather-app/
+  app.js
+  package-lock.json
+  package.json
+
+lab06/previous/
+  create_app_stack.sh
+  create_stack.py
+  delete_app_stack.sh
+  delete_stack.py
+  uploader-app/
+  viewer-app/
+
+lab06/stack/
+  __init__.py
+  balancer.py
+  clients.py
+  compute.py
+  config.py
+  database.py
+  network.py
+  outputs.py
+  policies.py
+  runner.py
+  scaling.py
+  storage.py
+  util.py
+  weather_compute.py
+  weather_config.py
+  weather_iam.py
+  weather_policies.py
+  weather_runner.py
+
+lab06/testing/
+  app_smoke_test.py
+  aws_helpers.py
+  chaos_test.py
+  http_probe.py
+  requirements.txt
+
+lab06/tests/
+  __init__.py
+  chaos/
+  conftest.py
+  helpers.py
+  integration/
+  unit/

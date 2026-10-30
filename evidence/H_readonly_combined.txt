@@ -1,0 +1,81 @@
+
+H2: Saved history
+{
+  "count": 1,
+  "lookups": [
+    {
+      "id": "1",
+      "zip": "60616",
+      "city": "Chicago",
+      "state": "IL",
+      "short_forecast": "Mostly Clear",
+      "temperature": "50",
+      "created_at": "2026-10-30T02:26:13.944Z"
+    }
+  ]
+}
+
+H3: Miss versus hit
+{
+  "first_request": {
+    "zip": "98101",
+    "status": 200,
+    "cache": "miss",
+    "seconds": 0.182
+  },
+  "second_request": {
+    "zip": "98101",
+    "status": 200,
+    "cache": "hit",
+    "seconds": 0.067
+  },
+  "earlier_attempts": []
+}
+
+H4: External DB connection
+{
+  "result": "no connection",
+  "error_type": "TimeoutError",
+  "detail": "timed out"
+}
+
+H5: Both roles against both secrets
+[
+  {
+    "role": "weather",
+    "parameter": "/itmo-444-544/db-password",
+    "decision": "allowed"
+  },
+  {
+    "role": "weather",
+    "parameter": "/itmo-444-544/gemini-api-key",
+    "decision": "implicitDeny"
+  },
+  {
+    "role": "advisor",
+    "parameter": "/itmo-444-544/db-password",
+    "decision": "implicitDeny"
+  },
+  {
+    "role": "advisor",
+    "parameter": "/itmo-444-544/gemini-api-key",
+    "decision": "allowed"
+  }
+]
+
+H6: Direct versus ALB access
+[
+  {
+    "tier": "weather",
+    "direct": "blocked: ConnectTimeout",
+    "through_ALB_status": 200
+  },
+  {
+    "tier": "advisor",
+    "direct": "blocked: ConnectTimeout",
+    "through_ALB_status": 200
+  }
+]
+
+Collection finished.
+Sections with errors: []

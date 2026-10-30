@@ -1,0 +1,10 @@
+{
+  "Class": "db.t4g.micro",
+  "Engine": "postgres",
+  "MultiAZ": false,
+  "Public": false,
+  "Encrypted": true,
+  "BackupRetentionDays": 0,
+  "Snapshots": [],
+  "AutomatedBackups": []
+}

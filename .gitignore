@@ -1,0 +1,78 @@
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+.aws/
+**/.aws/
+credentials
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Python environments and caches
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage*
+htmlcov/
+
+# Dependencies, generated outputs and reports
+node_modules/
+stack_outputs.*
+*.log
+coverage/
+dist/
+build/
+test-results/
+reports/
+junit*.xml
+.DS_Store
+Thumbs.db
+
+# Keep evidence in docs/screenshots rather than at the repository root
+/ss*.png
+
+# Secrets and backup artifacts
+secrets/
+**/secrets/
+*.bak
+*.backup
+*.orig
+*.rej
+*~
+backup/
+backups/
+*.zip
+*.7z
+*.tar
+*.tar.gz
+
+# Private configuration and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.ppk
+*.key
+.aws/
+
+# Installed dependencies and generated caches
+.venv/
+venv/
+node_modules/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Unrelated previous-lab documentation
+/docs/
+/lab03/
+/README.md
+/SUBMISSION_NOTES.md
+/part_f_helpers.txt

@@ -1,0 +1,20 @@
+{
+  "zip": "60616",
+  "city": "Chicago",
+  "state": "IL",
+  "forecast": {
+    "name": "Tonight",
+    "isDaytime": false,
+    "windSpeed": "5 mph",
+    "temperature": 50,
+    "shortForecast": "Clear",
+    "temperatureUnit": "F",
+    "precipitationChance": 0
+  },
+  "latitude": "41.8426",
+  "longitude": "-87.6306",
+  "cache": "hit",
+  "advice": "Wear a light jacket or a sweater to stay comfortable in the cool evening air. You will not need rain gear since the sky will be clear.",
+  "source": "gemini",
+  "model": "gemini-3.1-flash-lite"
+}

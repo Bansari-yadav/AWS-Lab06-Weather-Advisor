@@ -1,0 +1,145 @@
+{
+  "weather_observations": [
+    {
+      "seconds": 0.1,
+      "status": 200
+    },
+    {
+      "seconds": 5.2,
+      "status": 503
+    },
+    {
+      "seconds": 10.4,
+      "status": 503
+    },
+    {
+      "seconds": 18.9,
+      "status": 502
+    },
+    {
+      "seconds": 24.3,
+      "status": 502
+    },
+    {
+      "seconds": 29.5,
+      "status": 502
+    },
+    {
+      "seconds": 35.1,
+      "status": 502
+    },
+    {
+      "seconds": 40.3,
+      "status": 502
+    },
+    {
+      "seconds": 45.5,
+      "status": 502
+    },
+    {
+      "seconds": 50.6,
+      "status": 502
+    },
+    {
+      "seconds": 55.9,
+      "status": 502
+    },
+    {
+      "seconds": 61.6,
+      "status": 502
+    },
+    {
+      "seconds": 67.2,
+      "status": 502
+    },
+    {
+      "seconds": 72.6,
+      "status": 502
+    },
+    {
+      "seconds": 77.7,
+      "status": 200
+    }
+  ],
+  "advisor_observations": [
+    {
+      "seconds": 5.3,
+      "advice_status": 502,
+      "advice_error": "weather_service_unavailable",
+      "homepage_status": 200
+    },
+    {
+      "seconds": 11.1,
+      "advice_status": 502,
+      "advice_error": "weather_service_unavailable",
+      "homepage_status": 200
+    },
+    {
+      "seconds": 24.0,
+      "advice_status": 502,
+      "advice_error": "weather_service_unavailable",
+      "homepage_status": 200
+    },
+    {
+      "seconds": 29.4,
+      "advice_status": 502,
+      "advice_error": "weather_service_unavailable",
+      "homepage_status": 200
+    },
+    {
+      "seconds": 35.3,
+      "advice_status": 502,
+      "advice_error": "weather_service_unavailable",
+      "homepage_status": 200
+    },
+    {
+      "seconds": 41.5,
+      "advice_status": 502,
+      "advice_error": "weather_service_unavailable",
+      "homepage_status": 200
+    },
+    {
+      "seconds": 46.6,
+      "advice_status": 502,
+      "advice_error": "weather_service_unavailable",
+      "homepage_status": 200
+    },
+    {
+      "seconds": 51.8,
+      "advice_status": 502,
+      "advice_error": "weather_service_unavailable",
+      "homepage_status": 200
+    },
+    {
+      "seconds": 58.6,
+      "advice_status": 502,
+      "advice_error": "weather_service_unavailable",
+      "homepage_status": 200
+    },
+    {
+      "seconds": 64.7,
+      "advice_status": 502,
+      "advice_error": "weather_service_unavailable",
+      "homepage_status": 200
+    },
+    {
+      "seconds": 71.0,
+      "advice_status": 502,
+      "advice_error": "weather_service_unavailable",
+      "homepage_status": 200
+    },
+    {
+      "seconds": 77.7,
+      "advice_status": 200,
+      "advice_error": null,
+      "homepage_status": 200
+    }
+  ],
+  "terminated_instance": "i-08cc1bf153ff4c3f8",
+  "replacement_instances": [
+    "i-014ba1f0fd3191463"
+  ],
+  "recovery_seconds": 77.7,
+  "recovered_within_300_seconds": true,
+  "post_recovery_cache": "hit"
+}

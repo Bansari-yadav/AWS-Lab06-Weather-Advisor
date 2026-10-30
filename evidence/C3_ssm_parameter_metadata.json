@@ -1,0 +1,7 @@
+{
+  "Region": "us-east-2",
+  "Name": "/itmo-444-544/gemini-api-key",
+  "Type": "SecureString",
+  "Tier": "Standard",
+  "Version": 1
+}

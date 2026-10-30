@@ -1,0 +1,14 @@
+{
+  "count": 1,
+  "lookups": [
+    {
+      "id": "1",
+      "zip": "60616",
+      "city": "Chicago",
+      "state": "IL",
+      "short_forecast": "Mostly Clear",
+      "temperature": "50",
+      "created_at": "2026-10-30T02:26:13.944Z"
+    }
+  ]
+}

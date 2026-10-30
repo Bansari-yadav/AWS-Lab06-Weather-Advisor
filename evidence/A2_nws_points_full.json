@@ -1,0 +1,112 @@
+{
+  "@context": [
+    "https://geojson.org/geojson-ld/geojson-context.jsonld",
+    {
+      "@version": "1.1",
+      "wx": "https://api.weather.gov/ontology#",
+      "s": "https://schema.org/",
+      "geo": "http://www.opengis.net/ont/geosparql#",
+      "unit": "http://codes.wmo.int/common/unit/",
+      "@vocab": "https://api.weather.gov/ontology#",
+      "geometry": {
+        "@id": "s:GeoCoordinates",
+        "@type": "geo:wktLiteral"
+      },
+      "city": "s:addressLocality",
+      "state": "s:addressRegion",
+      "distance": {
+        "@id": "s:Distance",
+        "@type": "s:QuantitativeValue"
+      },
+      "bearing": {
+        "@type": "s:QuantitativeValue"
+      },
+      "value": {
+        "@id": "s:value"
+      },
+      "unitCode": {
+        "@id": "s:unitCode",
+        "@type": "@id"
+      },
+      "forecastOffice": {
+        "@type": "@id"
+      },
+      "forecastGridData": {
+        "@type": "@id"
+      },
+      "publicZone": {
+        "@type": "@id"
+      },
+      "county": {
+        "@type": "@id"
+      }
+    }
+  ],
+  "id": "https://api.weather.gov/points/41.8458,-87.6272",
+  "type": "Feature",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -87.6272,
+      41.8458
+    ]
+  },
+  "properties": {
+    "@id": "https://api.weather.gov/points/41.8458,-87.6272",
+    "@type": "wx:Point",
+    "cwa": "LOT",
+    "type": "land",
+    "forecastOffice": "https://api.weather.gov/offices/LOT",
+    "gridId": "LOT",
+    "gridX": 76,
+    "gridY": 72,
+    "forecast": "https://api.weather.gov/gridpoints/LOT/76,72/forecast",
+    "forecastHourly": "https://api.weather.gov/gridpoints/LOT/76,72/forecast/hourly",
+    "forecastGridData": "https://api.weather.gov/gridpoints/LOT/76,72",
+    "observationStations": "https://api.weather.gov/gridpoints/LOT/76,72/stations",
+    "relativeLocation": {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.6849386,
+          41.8370453
+        ]
+      },
+      "properties": {
+        "city": "Chicago",
+        "state": "IL",
+        "distance": {
+          "unitCode": "wmoUnit:m",
+          "value": 0
+        },
+        "bearing": {
+          "unitCode": "wmoUnit:degree_(angle)",
+          "value": 0
+        }
+      }
+    },
+    "forecastZone": "https://api.weather.gov/zones/forecast/ILZ104",
+    "county": "https://api.weather.gov/zones/county/ILC031",
+    "fireWeatherZone": "https://api.weather.gov/zones/fire/ILZ014",
+    "timeZone": "America/Chicago",
+    "radarStation": "KLOT",
+    "astronomicalData": {
+      "sunrise": "2026-10-29T07:19:33-05:00",
+      "sunset": "2026-10-29T17:48:51-05:00",
+      "transit": "2026-10-29T12:34:12-05:00",
+      "civilTwilightBegin": "2026-10-29T06:50:53-05:00",
+      "civilTwilightEnd": "2026-10-29T18:17:31-05:00",
+      "nauticalTwilightBegin": "2026-10-29T06:18:07-05:00",
+      "nauticalTwilightEnd": "2026-10-29T18:50:16-05:00",
+      "astronomicalTwilightBegin": "2026-10-29T05:45:46-05:00",
+      "astronomicalTwilightEnd": "2026-10-29T19:22:38-05:00"
+    },
+    "nwr": {
+      "transmitter": "KWO39",
+      "sameCode": "017031",
+      "areaBroadcast": "https://api.weather.gov/radio/KWO39/broadcast",
+      "pointBroadcast": "https://api.weather.gov/points/41.8458,-87.6272/radio"
+    }
+  }
+}

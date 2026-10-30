@@ -1,0 +1,5 @@
+GEMINI PARAMETER CLEANUP ERROR:
+User: arn:aws:iam::587104705562:user/lab-user is not authorized to perform: ssm:DeleteParameter on resource: arn:aws:ssm:us-east-2:587104705562:parameter/itmo-444-544/gemini-api-key because no identity-based policy allows the ssm:DeleteParameter action
+Temporary browser SSH rule removed.
+Gemini SSM parameter deleted.
+Temporary browser SSH rule removed.

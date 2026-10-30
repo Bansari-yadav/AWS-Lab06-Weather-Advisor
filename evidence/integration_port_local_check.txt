@@ -1,0 +1,1 @@
+PASS: integration DB-port check uses configured host/port and handles a simulated timeout. No live AWS call was made.

@@ -1,0 +1,48 @@
+{
+  "weather_during_outage": {
+    "status": 200,
+    "body": {
+      "zip": "60616",
+      "city": "Chicago",
+      "state": "IL",
+      "latitude": "41.8426",
+      "longitude": "-87.6306",
+      "forecast": {
+        "name": "Tonight",
+        "temperature": 50,
+        "temperatureUnit": "F",
+        "shortForecast": "Clear",
+        "windSpeed": "5 mph",
+        "precipitationChance": 0,
+        "isDaytime": false
+      },
+      "cache": "unavailable"
+    }
+  },
+  "history_during_outage": {
+    "status": 503,
+    "body": {
+      "error": "database_unavailable"
+    }
+  },
+  "after_restoration": {
+    "status": 200,
+    "body": {
+      "zip": "60616",
+      "city": "Chicago",
+      "state": "IL",
+      "latitude": "41.8426",
+      "longitude": "-87.6306",
+      "forecast": {
+        "name": "Tonight",
+        "temperature": 50,
+        "temperatureUnit": "F",
+        "shortForecast": "Clear",
+        "windSpeed": "5 mph",
+        "precipitationChance": 0,
+        "isDaytime": false
+      },
+      "cache": "miss"
+    }
+  }
+}

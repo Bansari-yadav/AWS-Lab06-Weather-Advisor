@@ -1,0 +1,11 @@
+{
+  "name": "This Afternoon",
+  "temperature": 68,
+  "temperatureUnit": "F",
+  "shortForecast": "Mostly Cloudy",
+  "windSpeed": "10 mph",
+  "probabilityOfPrecipitation": {
+    "unitCode": "wmoUnit:percent",
+    "value": 13
+  }
+}

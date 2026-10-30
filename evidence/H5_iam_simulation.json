@@ -1,0 +1,22 @@
+[
+  {
+    "role": "weather",
+    "parameter": "/itmo-444-544/db-password",
+    "decision": "allowed"
+  },
+  {
+    "role": "weather",
+    "parameter": "/itmo-444-544/gemini-api-key",
+    "decision": "implicitDeny"
+  },
+  {
+    "role": "advisor",
+    "parameter": "/itmo-444-544/db-password",
+    "decision": "implicitDeny"
+  },
+  {
+    "role": "advisor",
+    "parameter": "/itmo-444-544/gemini-api-key",
+    "decision": "allowed"
+  }
+]

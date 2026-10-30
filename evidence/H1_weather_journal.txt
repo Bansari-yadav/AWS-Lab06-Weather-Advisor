@@ -1,0 +1,66 @@
+weather=> \q\q
+[ec2-user@ip-172-31-9-241 ~]$ unset PGPASSWORDunset PGPASSWORD
+[ec2-user@ip-172-31-9-241 ~]$ cat ~/H1_weather_journal.txtcat ~/H1_weather_journal.txt
+cat: /home/ec2-user/H1_weather_journal.txtcat: No such file or directory
+Oct 30 02:23:46 ip-172-31-9-241.us-east-2.compute.internal node[26210]: (node:26210) Warning: NodeDeprecationWarning: The AWS SDK for JavaScript (v3) will
+Oct 30 02:23:46 ip-172-31-9-241.us-east-2.compute.internal node[26210]: no longer support Node.js v18.20.8 in January 2026.
+Oct 30 02:23:46 ip-172-31-9-241.us-east-2.compute.internal node[26210]: To continue receiving updates to AWS services, bug fixes, and security
+Oct 30 02:23:46 ip-172-31-9-241.us-east-2.compute.internal node[26210]: updates please upgrade to a supported Node.js LTS version.
+Oct 30 02:23:46 ip-172-31-9-241.us-east-2.compute.internal node[26210]: More information can be found at: https://a.co/c895JFp
+Oct 30 02:23:46 ip-172-31-9-241.us-east-2.compute.internal node[26210]: (Use `node --trace-warnings ...` to show where the warning was created)
+Oct 30 02:23:46 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:23:46.232Z","event":"weather_started","port":"3000"}
+Oct 30 02:26:13 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:26:13.552Z","event":"weather_request","zip":"60616"}
+Oct 30 02:26:13 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:26:13.947Z","event":"weather_success","zip":"60616","cache":"miss","ms":395}
+Oct 30 02:26:14 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:26:14.008Z","event":"weather_request","zip":"60616"}
+Oct 30 02:26:14 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:26:14.010Z","event":"weather_success","zip":"60616","cache":"hit","ms":2}
+Oct 30 02:26:14 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:26:14.153Z","event":"weather_rejected","reason":"invalid_zip"}
+Oct 30 02:26:14 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:26:14.209Z","event":"weather_request","zip":"00000"}
+Oct 30 02:26:14 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:26:14.223Z","event":"weather_rejected","reason":"zip_not_found","zip":"00000"}
+Oct 30 02:26:14 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:26:14.326Z","event":"weather_request","zip":"60616"}
+Oct 30 02:26:14 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:26:14.328Z","event":"weather_success","zip":"60616","cache":"hit","ms":2}
+Oct 30 02:28:22 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:28:22.269Z","event":"weather_request","zip":"60616"}
+Oct 30 02:28:22 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:28:22.301Z","event":"weather_success","zip":"60616","cache":"hit","ms":32}
+Oct 30 02:30:10 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:30:10.953Z","event":"weather_request","zip":"98101"}
+Oct 30 02:30:11 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:30:11.070Z","event":"weather_success","zip":"98101","cache":"miss","ms":117}
+Oct 30 02:30:11 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:30:11.134Z","event":"weather_request","zip":"98101"}
+Oct 30 02:30:11 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:30:11.136Z","event":"weather_success","zip":"98101","cache":"hit","ms":2}
+Oct 30 02:51:27 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:51:27.738Z","event":"weather_request","zip":"60616"}
+Oct 30 02:51:27 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:51:27.894Z","event":"weather_success","zip":"60616","cache":"miss","ms":156}
+Oct 30 02:51:27 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:51:27.901Z","event":"weather_request","zip":"10001"}
+Oct 30 02:51:27 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:51:27.957Z","event":"weather_success","zip":"10001","cache":"miss","ms":56}
+Oct 30 02:51:27 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:51:27.964Z","event":"weather_request","zip":"90210"}
+Oct 30 02:51:28 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:51:28.023Z","event":"weather_success","zip":"90210","cache":"miss","ms":59}
+Oct 30 02:51:28 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:51:28.030Z","event":"weather_request","zip":"60616"}
+Oct 30 02:51:28 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:51:28.032Z","event":"weather_success","zip":"60616","cache":"hit","ms":2}
+[ec2-user@ip-172-31-9-241 ~]$ cat ~/H1_weather_journal.txt
+Oct 30 02:23:46 ip-172-31-9-241.us-east-2.compute.internal node[26210]: (node:26210) Warning: NodeDeprecationWarning: The AWS SDK for JavaScript (v3) will
+Oct 30 02:23:46 ip-172-31-9-241.us-east-2.compute.internal node[26210]: no longer support Node.js v18.20.8 in January 2026.
+Oct 30 02:23:46 ip-172-31-9-241.us-east-2.compute.internal node[26210]: To continue receiving updates to AWS services, bug fixes, and security
+Oct 30 02:23:46 ip-172-31-9-241.us-east-2.compute.internal node[26210]: updates please upgrade to a supported Node.js LTS version.
+Oct 30 02:23:46 ip-172-31-9-241.us-east-2.compute.internal node[26210]: More information can be found at: https://a.co/c895JFp
+Oct 30 02:23:46 ip-172-31-9-241.us-east-2.compute.internal node[26210]: (Use `node --trace-warnings ...` to show where the warning was created)
+Oct 30 02:23:46 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:23:46.232Z","event":"weather_started","port":"3000"}
+Oct 30 02:26:13 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:26:13.552Z","event":"weather_request","zip":"60616"}
+Oct 30 02:26:13 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:26:13.947Z","event":"weather_success","zip":"60616","cache":"miss","ms":395}
+Oct 30 02:26:14 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:26:14.008Z","event":"weather_request","zip":"60616"}
+Oct 30 02:26:14 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:26:14.010Z","event":"weather_success","zip":"60616","cache":"hit","ms":2}
+Oct 30 02:26:14 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:26:14.153Z","event":"weather_rejected","reason":"invalid_zip"}
+Oct 30 02:26:14 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:26:14.209Z","event":"weather_request","zip":"00000"}
+Oct 30 02:26:14 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:26:14.223Z","event":"weather_rejected","reason":"zip_not_found","zip":"00000"}
+Oct 30 02:26:14 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:26:14.326Z","event":"weather_request","zip":"60616"}
+Oct 30 02:26:14 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:26:14.328Z","event":"weather_success","zip":"60616","cache":"hit","ms":2}
+Oct 30 02:28:22 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:28:22.269Z","event":"weather_request","zip":"60616"}
+Oct 30 02:28:22 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:28:22.301Z","event":"weather_success","zip":"60616","cache":"hit","ms":32}
+Oct 30 02:30:10 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:30:10.953Z","event":"weather_request","zip":"98101"}
+Oct 30 02:30:11 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:30:11.070Z","event":"weather_success","zip":"98101","cache":"miss","ms":117}
+Oct 30 02:30:11 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:30:11.134Z","event":"weather_request","zip":"98101"}
+Oct 30 02:30:11 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:30:11.136Z","event":"weather_success","zip":"98101","cache":"hit","ms":2}
+Oct 30 02:51:27 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:51:27.738Z","event":"weather_request","zip":"60616"}
+Oct 30 02:51:27 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:51:27.894Z","event":"weather_success","zip":"60616","cache":"miss","ms":156}
+Oct 30 02:51:27 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:51:27.901Z","event":"weather_request","zip":"10001"}
+Oct 30 02:51:27 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:51:27.957Z","event":"weather_success","zip":"10001","cache":"miss","ms":56}
+Oct 30 02:51:27 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:51:27.964Z","event":"weather_request","zip":"90210"}
+Oct 30 02:51:28 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:51:28.023Z","event":"weather_success","zip":"90210","cache":"miss","ms":59}
+Oct 30 02:51:28 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:51:28.030Z","event":"weather_request","zip":"60616"}
+Oct 30 02:51:28 ip-172-31-9-241.us-east-2.compute.internal node[26210]: {"ts":"2026-10-30T02:51:28.032Z","event":"weather_success","zip":"60616","cache":"hit","ms":2}
+[ec2-user@ip-172-31-9-241 ~]$ 

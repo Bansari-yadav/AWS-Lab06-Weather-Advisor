@@ -1,0 +1,58 @@
+Weather instance termination requested: i-08a1a93987d659f64
+WEATHER: {"seconds": 0.6, "status": 200}
+WEATHER: {"seconds": 5.9, "status": 503}
+ADVISOR: {"seconds": 6.2, "advice_status": 502, "advice_error": "weather_service_unavailable", "homepage_status": 200}
+WEATHER: {"seconds": 11.1, "status": 503}
+ADVISOR: {"seconds": 12.9, "advice_status": 502, "advice_error": "weather_service_unavailable", "homepage_status": 200}
+WEATHER: {"seconds": 16.2, "status": 503}
+ADVISOR: {"seconds": 18.0, "advice_status": 502, "advice_error": "weather_service_unavailable", "homepage_status": 200}
+WEATHER: {"seconds": 21.6, "status": 502}
+ADVISOR: {"seconds": 23.2, "advice_status": 502, "advice_error": "weather_service_unavailable", "homepage_status": 200}
+WEATHER: {"seconds": 27.1, "status": 502}
+ADVISOR: {"seconds": 28.4, "advice_status": 502, "advice_error": "weather_service_unavailable", "homepage_status": 200}
+WEATHER: {"seconds": 32.4, "status": 502}
+ADVISOR: {"seconds": 34.3, "advice_status": 502, "advice_error": "weather_service_unavailable", "homepage_status": 200}
+WEATHER: {"seconds": 37.5, "status": 502}
+ADVISOR: {"seconds": 39.7, "advice_status": 502, "advice_error": "weather_service_unavailable", "homepage_status": 200}
+WEATHER: {"seconds": 42.7, "status": 502}
+ADVISOR: {"seconds": 45.3, "advice_status": 502, "advice_error": "weather_service_unavailable", "homepage_status": 200}
+WEATHER: {"seconds": 47.9, "status": 502}
+ADVISOR: {"seconds": 51.0, "advice_status": 502, "advice_error": "weather_service_unavailable", "homepage_status": 200}
+WEATHER: {"seconds": 53.7, "status": 502}
+ADVISOR: {"seconds": 56.2, "advice_status": 502, "advice_error": "weather_service_unavailable", "homepage_status": 200}
+WEATHER: {"seconds": 59.3, "status": 502}
+ADVISOR: {"seconds": 61.9, "advice_status": 502, "advice_error": "weather_service_unavailable", "homepage_status": 200}
+WEATHER: {"seconds": 64.5, "status": 502}
+ADVISOR: {"seconds": 67.3, "advice_status": 502, "advice_error": "weather_service_unavailable", "homepage_status": 200}
+WEATHER: {"seconds": 69.8, "status": 502}
+ADVISOR: {"seconds": 73.2, "advice_status": 502, "advice_error": "weather_service_unavailable", "homepage_status": 200}
+WEATHER: {"seconds": 75.1, "status": 502}
+ADVISOR: {"seconds": 79.9, "advice_status": 200, "advice_error": null, "homepage_status": 200}
+WEATHER: {"seconds": 80.3, "status": 200}
+
+RECOVERY SUMMARY
+{
+  "terminated_instance": "i-08a1a93987d659f64",
+  "replacement_instances": [
+    "i-08cc1bf153ff4c3f8"
+  ],
+  "recovery_seconds": 80.3,
+  "recovered_within_300_seconds": true,
+  "post_recovery_cache": "hit"
+}
+PASS: weather returns a forecast HTTP 200
+PASS: repeat request is a cache hit HTTP 200
+PASS: history contains saved lookups HTTP 200
+PASS: weather rejects invalid ZIP HTTP 400
+PASS: weather rejects unknown ZIP HTTP 404
+PASS: advisor returns advice HTTP 200
+PASS: advice comes from Gemini 
+Source: gemini
+Advice: Wear a light jacket or a sweater to stay comfortable in the cool air. Since the skies are clear and wind is minimal, you will not need any rain protection.
+PASS: advisor rejects invalid ZIP HTTP 400
+PASS: advisor homepage loads HTTP 200
+
+9 of 9 checks passed
+Advisor page: http://itmo-444-544-weather-alb-33139536.us-east-2.elb.amazonaws.com:8081/
+
+

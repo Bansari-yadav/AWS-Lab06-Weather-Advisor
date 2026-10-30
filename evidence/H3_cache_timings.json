@@ -1,0 +1,15 @@
+{
+  "first_request": {
+    "zip": "98101",
+    "status": 200,
+    "cache": "miss",
+    "seconds": 0.182
+  },
+  "second_request": {
+    "zip": "98101",
+    "status": 200,
+    "cache": "hit",
+    "seconds": 0.067
+  },
+  "earlier_attempts": []
+}

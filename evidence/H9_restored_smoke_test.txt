@@ -1,0 +1,14 @@
+PASS: weather returns a forecast HTTP 200
+PASS: repeat request is a cache hit HTTP 200
+PASS: history contains saved lookups HTTP 200
+PASS: weather rejects invalid ZIP HTTP 400
+PASS: weather rejects unknown ZIP HTTP 404
+PASS: advisor returns advice HTTP 200
+PASS: advice comes from Gemini 
+Source: gemini
+Advice: Wear a light jacket or a sweater to stay comfortable in the cool evening air. You will not need rain gear since the sky will be clear.
+PASS: advisor rejects invalid ZIP HTTP 400
+PASS: advisor homepage loads HTTP 200
+
+9 of 9 checks passed
+Advisor page: http://itmo-444-544-weather-alb-33139536.us-east-2.elb.amazonaws.com:8081/
