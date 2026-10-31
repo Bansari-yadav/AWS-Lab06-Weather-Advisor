@@ -5,7 +5,7 @@ Graduate cloud-computing lab built with Python/boto3, Node.js, Amazon EC2, an Ap
 <!-- navigation-start -->
 ## Start here — Guide for the reviewer
 
-This repository documents **Bansari Yadav's ITMO 544 graduate implementation** of *Weather Advisor in the Cloud: Two Tiers, a Free AI Model and a PostgreSQL Database*. This README brings together the assignment sequence, source-code links, recorded results, required written answers, and all 26 screenshots.
+This repository documents **Bansari Yadav's ITMO 544 graduate implementation** of *Weather Advisor in the Cloud: Two Tiers, a Free AI Model and a PostgreSQL Database*. This README brings together the assignment sequence, source-code links, recorded results, required written answers, and all 26 screenshots embedded beside their corresponding steps.
 
 **Current status:** the deployed lab resources were deleted and the named-resource cleanup checks passed. The URLs in historical evidence are records of testing, not active demonstration links. Google AI Studio key deletion/restriction still needs confirmation.
 
@@ -21,7 +21,7 @@ This repository documents **Bansari Yadav's ITMO 544 graduate implementation** o
 8. [Three required paragraphs](#section-161--three-required-written-paragraphs)
 9. [All 13 security/privacy review Q&As](#section-151--security-and-privacy-review-13-questions-and-answers)
 10. [Graduate short answers](#section-162--graduate-short-answers)
-11. [Screenshot gallery](#screenshot-evidence)
+11. Screenshots are embedded alongside the assignment steps below.
 
 <a id="project-structure"></a>
 ## Project structure
@@ -98,11 +98,29 @@ I worked in a separate `lab06` copy, retained the Python `stack/` package and py
 
 **Review:** [archived previous applications](previous/) · [folder listing, first 40 lines](evidence/Part0_folder_layout_first40.txt) · [full folder listing](evidence/Part0_folder_layout_full.txt) · [SS21a](evidence/SS21a.png). The listing was collected using a Windows/Python equivalent of the PDF's bash command.
 
+**SS21a — Project folder layout**
+
+![SS21a: Project folder layout](evidence/SS21a.png)
+
+
 ### Part A — Call the ZIP and NWS APIs manually
 
 I looked up ZIP 60616 and checked that ZIP 00000 returned 404. I called the NWS points endpoint with an identifying User-Agent, extracted its forecast URL, and requested the first forecast period. This established the response fields and error handling before using them in the weather service. A fresh application lookup uses ZIP-to-coordinates, NWS points, and NWS forecast requests: three HTTP requests across two providers.
 
 **Review:** [60616 ZIP response](evidence/A1_zip_60616.txt) · [00000 status](evidence/A1_zip_00000.txt) · [NWS points JSON](evidence/A2_nws_points_full.json) · [forecast URL](evidence/A2_forecast_url.txt) · [first period](evidence/A2_first_forecast_period.txt) · [SS1](evidence/SS1.png), [SS2](evidence/SS2.png), [SS3](evidence/SS3.png). The written API explanation appears below.
+
+**SS1 — ZIP 60616 lookup**
+
+![SS1: ZIP 60616 lookup](evidence/SS1.png)
+
+**SS2 — NWS points and forecast URL**
+
+![SS2: NWS points and forecast URL](evidence/SS2.png)
+
+**SS3 — First forecast period**
+
+![SS3: First forecast period](evidence/SS3.png)
+
 
 ### Part B — Configure names, ports, and cache settings
 
@@ -115,6 +133,11 @@ I added weather/advisor resource names, listener ports 8080 and 8081, app port 3
 I created a Gemini key, tested a model request, and supplied the key through hidden input to the Python storage helper. The helper stored and verified a Standard SSM SecureString without printing its value. The published evidence records API results and parameter metadata.
 
 **Review:** [key storage helper](store_gemini_key.py) · [API test helper](test_gemini_key.py) · [Gemini test result](evidence/C2_gemini_test.json) · [SSM metadata](evidence/C3_ssm_parameter_metadata.json) · [SS4](evidence/SS4.png).
+
+**SS4 — SSM SecureString metadata; secret value hidden**
+
+![SS4: SSM SecureString metadata; secret value hidden](evidence/SS4.png)
+
 
 ### Part D — Build the weather and advisor applications
 
@@ -130,11 +153,33 @@ The live database was PostgreSQL on `db.t4g.micro`, with 20 GB encrypted storage
 
 **Review:** [create entry point](create_database.py) · [delete entry point](delete_database.py) · [database helpers](stack/database.py) · [database unit tests](tests/unit/test_weather_database.py) · [creation output](evidence/E2_database_creation.txt) · [live DB settings](evidence/H4_database_verification.json) · [SS5](evidence/SS5.png), [SS8](evidence/SS8.png), [SS9](evidence/SS9.png).
 
+**SS5 — Database unit tests**
+
+![SS5: Database unit tests](evidence/SS5.png)
+
+**SS8 — Database creation**
+
+![SS8: Database creation](evidence/SS8.png)
+
+
 ### Part F — Implement and create the two-tier application stack
 
 I added separate weather/advisor IAM roles and profiles. Each role may read only its own exact secret ARN. The runner prepares network access and target groups, ensures the ALB and listeners exist before building launch templates, then creates each Auto Scaling Group. Weather startup receives the DB endpoint; advisor startup receives the ALB DNS name. Secret values are not embedded in either startup script. Mocked tests cover ordering, policy separation, repeat creation, cleanup, and the 16 KB user-data limit.
 
 **Review:** [create entry point](create_weather_stack.py) · [delete entry point](delete_weather_stack.py) · [stack orchestration](stack/weather_runner.py) · [IAM helpers](stack/weather_iam.py) · [policies](stack/weather_policies.py) · [startup and launch templates](stack/weather_compute.py) · [stack unit tests](tests/unit/test_weather_stack.py) · [SS6](evidence/SS6.png).
+
+**SS6 — Stack unit tests**
+
+![SS6: Stack unit tests](evidence/SS6.png)
+
+**SS7 — Initial complete unit suite**
+
+![SS7: Initial complete unit suite](evidence/SS7.png)
+
+**SS21b — Earlier unit tests without real AWS credentials**
+
+![SS21b: Earlier unit tests without real AWS credentials](evidence/SS21b.png)
+
 
 ### Part G — Deploy and test both services
 
@@ -144,20 +189,140 @@ After the database was available, I ran the stack creation script and waited for
 
 **Review:** [stack creation output](evidence/G1_stack_creation.txt) · [target health](evidence/G1_target_health.json) · [60616 advice JSON](evidence/G2_advice_60616.json) · [nine-check output](evidence/G3_smoke_test.txt) · [smoke-test code](testing/app_smoke_test.py) · [final integration output](evidence/final_revision_integration_tests.txt) · [SS10](evidence/SS10.png), [SS11](evidence/SS11.png), [SS22](evidence/SS22.png). The page screenshot and JSON are separate requests for the same ZIP, so generated wording can differ.
 
+**SS9 — Database settings and healthy application targets**
+
+![SS9: Database settings and healthy application targets](evidence/SS9.png)
+
+**SS10 — Nine application smoke checks**
+
+![SS10: Nine application smoke checks](evidence/SS10.png)
+
+**SS11 — Deployed Weather Advisor page**
+
+![SS11: Deployed Weather Advisor page](evidence/SS11.png)
+
+**SS18 — Initial live integration suite**
+
+![SS18: Initial live integration suite](evidence/SS18.png)
+
+**SS22 — Final integration suite: ZIP 60616 miss, hit, history, and ten tests passed**
+
+![SS22: Final integration suite: ZIP 60616 miss, hit, history, and ten tests passed](evidence/SS22.png)
+
+
 ### Part H — Run the ten experiments
 
-| Step | What I did and observed | Evidence |
-|---|---|---|
-| **H1: Service logs** | Requested forecasts and inspected structured weather logs. One 60616 hit took 2 ms; the preceding miss took 156 ms. | [Journal](evidence/H1_weather_journal.txt), [SS12](evidence/SS12.png) |
-| **H2: Stored data** | Requested history and queried PostgreSQL from weather with verified TLS. The SQL screenshot recorded five saved rows at that point. | [History](evidence/H2_history.json), [SQL screenshot SS13](evidence/SS13.png) |
-| **H3: Cache timing** | Requested unused ZIP 98101 twice. Miss: 0.182 s; hit: 0.067 s. | [Timing JSON](evidence/H3_cache_timings.json) |
-| **H4: DB exposure/backups** | Checked RDS properties and backup lists, then attempted a local DB connection. Retention was 0, snapshots/backups were empty, the DB was private/single-AZ/encrypted, and the external connection timed out. | [Properties](evidence/H4_database_verification.json), [external connection](evidence/H4_external_connection.json), [SS9](evidence/SS9.png) |
-| **H5: Secret permissions** | Simulated both roles against both secrets. Each role was allowed only its own parameter and implicitly denied the other. | [Four decisions](evidence/H5_iam_simulation.json) |
-| **H6: ALB-only app access** | Tried both instances directly on app port 3000 and through their ALB listeners. Direct access timed out; both ALB requests returned 200. | [Network results](evidence/H6_network_isolation.json) |
-| **H7: Database failure** | Temporarily removed DB access, restarted weather, captured 200 with cache unavailable, history 503, and a DB error log, then restored access and checked recovery. | [Failure/restoration](evidence/H7_database_failure.json), [SS14](evidence/SS14.png), [experiment code](experiment_database_failure.py) |
-| **H8: Gemini failure** | Temporarily stored an invalid key and waited for key-cache expiry. Three responses used fallback; logs showed Gemini HTTP 400. Restored the real key and passed the smoke test. | [Fallback responses](evidence/H8_fallback_answers.json), [restored checks](evidence/H8_restored_smoke_test.txt), [SS15](evidence/SS15.png), [SS16a](evidence/SS16a.png), [SS16b](evidence/SS16b.png), [experiment code](experiment_gemini_failure.py) |
-| **H9: Instance failure** | Terminated weather through its ASG without reducing desired capacity. Advisor advice returned 502 while its homepage remained 200. Recovery took 80.3 s in the initial experiment and 77.7 s in the separate chaos run; saved cache state survived in RDS. | [Recovery record](evidence/H9_weather_recovery.json), [SS17a](evidence/SS17a.png), [SS17b](evidence/SS17b.png), [SS19](evidence/SS19.png), [experiment code](experiment_weather_recovery.py) |
-| **H10: Cleanup** | Removed app instances and ALB, deleted the DB without a final snapshot/retained backups, completed dependency cleanup, removed secret parameters and the temporary SSH rule, then verified named resources absent. | [Final verification](evidence/final_revision_cleanup_verification.txt), [SS23](evidence/SS23.png), [cleanup verification code](verify_cleanup.py) |
+#### H1: Service logs
+
+Requested forecasts and inspected structured weather logs. One 60616 hit took 2 ms; the preceding miss took 156 ms.
+
+**Code and saved evidence:** [Journal](evidence/H1_weather_journal.txt), [SS12](evidence/SS12.png)
+
+
+**SS12 — Weather service journal**
+
+![SS12: Weather service journal](evidence/SS12.png)
+
+#### H2: Stored data
+
+Requested history and queried PostgreSQL from weather with verified TLS. The SQL screenshot recorded five saved rows at that point.
+
+**Code and saved evidence:** [History](evidence/H2_history.json), [SQL screenshot SS13](evidence/SS13.png)
+
+
+**SS13 — Saved lookup rows and SQL count**
+
+![SS13: Saved lookup rows and SQL count](evidence/SS13.png)
+
+#### H3: Cache timing
+
+Requested unused ZIP 98101 twice. Miss: 0.182 s; hit: 0.067 s.
+
+**Code and saved evidence:** [Timing JSON](evidence/H3_cache_timings.json)
+
+#### H4: DB exposure/backups
+
+Checked RDS properties and backup lists, then attempted a local DB connection. Retention was 0, snapshots/backups were empty, the DB was private/single-AZ/encrypted, and the external connection timed out.
+
+**Code and saved evidence:** [Properties](evidence/H4_database_verification.json), [external connection](evidence/H4_external_connection.json), [SS9](evidence/SS9.png)
+
+The database-settings and target-health screenshot is shown in Part G (SS9); the linked JSON records the full H4 checks.
+
+#### H5: Secret permissions
+
+Simulated both roles against both secrets. Each role was allowed only its own parameter and implicitly denied the other.
+
+**Code and saved evidence:** [Four decisions](evidence/H5_iam_simulation.json)
+
+#### H6: ALB-only app access
+
+Tried both instances directly on app port 3000 and through their ALB listeners. Direct access timed out; both ALB requests returned 200.
+
+**Code and saved evidence:** [Network results](evidence/H6_network_isolation.json)
+
+#### H7: Database failure
+
+Temporarily removed DB access, restarted weather, captured 200 with cache unavailable, history 503, and a DB error log, then restored access and checked recovery.
+
+**Code and saved evidence:** [Failure/restoration](evidence/H7_database_failure.json), [SS14](evidence/SS14.png), [experiment code](experiment_database_failure.py)
+
+
+**SS14 — Database failure log and continued weather response**
+
+![SS14: Database failure log and continued weather response](evidence/SS14.png)
+
+#### H8: Gemini failure
+
+Temporarily stored an invalid key and waited for key-cache expiry. Three responses used fallback; logs showed Gemini HTTP 400. Restored the real key and passed the smoke test.
+
+**Code and saved evidence:** [Fallback responses](evidence/H8_fallback_answers.json), [restored checks](evidence/H8_restored_smoke_test.txt), [SS15](evidence/SS15.png), [SS16a](evidence/SS16a.png), [SS16b](evidence/SS16b.png), [experiment code](experiment_gemini_failure.py)
+
+
+**SS15 — Advisor Gemini error journal**
+
+![SS15: Advisor Gemini error journal](evidence/SS15.png)
+
+**SS16a — Fallback responses with an invalid test key**
+
+![SS16a: Fallback responses with an invalid test key](evidence/SS16a.png)
+
+**SS16b — Real key restored and smoke checks passed**
+
+![SS16b: Real key restored and smoke checks passed](evidence/SS16b.png)
+
+#### H9: Instance failure
+
+Terminated weather through its ASG without reducing desired capacity. Advisor advice returned 502 while its homepage remained 200. Recovery took 80.3 s in the initial experiment and 77.7 s in the separate chaos run; saved cache state survived in RDS.
+
+**Code and saved evidence:** [Recovery record](evidence/H9_weather_recovery.json), [SS17a](evidence/SS17a.png), [SS17b](evidence/SS17b.png), [SS19](evidence/SS19.png), [experiment code](experiment_weather_recovery.py)
+
+
+**SS17a — Advisor outage behavior and initial recovery measurement**
+
+![SS17a: Advisor outage behavior and initial recovery measurement](evidence/SS17a.png)
+
+**SS17b — Initial recovery and subsequent smoke checks**
+
+![SS17b: Initial recovery and subsequent smoke checks](evidence/SS17b.png)
+
+**SS19 — Graduate chaos tests and 77.7-second recovery**
+
+![SS19: Graduate chaos tests and 77.7-second recovery](evidence/SS19.png)
+
+#### H10: Cleanup
+
+Removed app instances and ALB, deleted the DB without a final snapshot/retained backups, completed dependency cleanup, removed secret parameters and the temporary SSH rule, then verified named resources absent.
+
+**Code and saved evidence:** [Final verification](evidence/final_revision_cleanup_verification.txt), [SS23](evidence/SS23.png), [cleanup verification code](verify_cleanup.py)
+
+
+**SS20 — First deployment cleanup verification**
+
+![SS20: First deployment cleanup verification](evidence/SS20.png)
+
+**SS23 — Final deployment cleanup: all checked lab resources absent**
+
+![SS23: Final deployment cleanup: all checked lab resources absent](evidence/SS23.png)
 
 The paragraphs below explain the logs, row count, cache policy, IAM boundary, security-group sources, retry pause, fallback weakness, and state placement. Cleanup encountered asynchronous AWS dependency delays; final verification, rather than an earlier failed delete attempt, is the evidence that removal completed. The actual Google AI Studio key is separate from its deleted SSM copy.
 
@@ -399,123 +564,3 @@ The final deployment passed all **10 integration tests**, explicitly showing ZIP
 - [Final cleanup screenshot](evidence/SS23.png)
 
 The AWS SSM copy of the Gemini key is deleted. Deletion or restriction of the actual replacement key in Google AI Studio still needs confirmation; deleting an SSM copy does not revoke Google's key.
-
-## Screenshot evidence
-
-Screenshots record separate stages of the lab. SS22 shows the final integration run; SS23 shows the final cleanup. Earlier test counts and recovery measurements belong to earlier runs.
-
-### API exploration
-
-**SS1 — ZIP 60616 lookup**
-
-![SS1: ZIP 60616 lookup](evidence/SS1.png)
-
-**SS2 — NWS points and forecast URL**
-
-![SS2: NWS points and forecast URL](evidence/SS2.png)
-
-**SS3 — First forecast period**
-
-![SS3: First forecast period](evidence/SS3.png)
-
-**SS4 — SSM SecureString metadata; secret value hidden**
-
-![SS4: SSM SecureString metadata; secret value hidden](evidence/SS4.png)
-
-### Unit tests and database creation
-
-**SS5 — Database unit tests**
-
-![SS5: Database unit tests](evidence/SS5.png)
-
-**SS6 — Stack unit tests**
-
-![SS6: Stack unit tests](evidence/SS6.png)
-
-**SS7 — Initial complete unit suite**
-
-![SS7: Initial complete unit suite](evidence/SS7.png)
-
-**SS8 — Database creation**
-
-![SS8: Database creation](evidence/SS8.png)
-
-**SS9 — Database settings and healthy application targets**
-
-![SS9: Database settings and healthy application targets](evidence/SS9.png)
-
-### Application and database evidence
-
-**SS10 — Nine application smoke checks**
-
-![SS10: Nine application smoke checks](evidence/SS10.png)
-
-**SS11 — Deployed Weather Advisor page**
-
-![SS11: Deployed Weather Advisor page](evidence/SS11.png)
-
-**SS12 — Weather service journal**
-
-![SS12: Weather service journal](evidence/SS12.png)
-
-**SS13 — Saved lookup rows and SQL count**
-
-![SS13: Saved lookup rows and SQL count](evidence/SS13.png)
-
-**SS14 — Database failure log and continued weather response**
-
-![SS14: Database failure log and continued weather response](evidence/SS14.png)
-
-### Gemini fallback and restoration
-
-**SS15 — Advisor Gemini error journal**
-
-![SS15: Advisor Gemini error journal](evidence/SS15.png)
-
-**SS16a — Fallback responses with an invalid test key**
-
-![SS16a: Fallback responses with an invalid test key](evidence/SS16a.png)
-
-**SS16b — Real key restored and smoke checks passed**
-
-![SS16b: Real key restored and smoke checks passed](evidence/SS16b.png)
-
-### Recovery and graduate tests
-
-**SS17a — Advisor outage behavior and initial recovery measurement**
-
-![SS17a: Advisor outage behavior and initial recovery measurement](evidence/SS17a.png)
-
-**SS17b — Initial recovery and subsequent smoke checks**
-
-![SS17b: Initial recovery and subsequent smoke checks](evidence/SS17b.png)
-
-**SS18 — Initial live integration suite**
-
-![SS18: Initial live integration suite](evidence/SS18.png)
-
-**SS19 — Graduate chaos tests and 77.7-second recovery**
-
-![SS19: Graduate chaos tests and 77.7-second recovery](evidence/SS19.png)
-
-### Cleanup and final verification
-
-**SS20 — First deployment cleanup verification**
-
-![SS20: First deployment cleanup verification](evidence/SS20.png)
-
-**SS21a — Project folder layout**
-
-![SS21a: Project folder layout](evidence/SS21a.png)
-
-**SS21b — Earlier unit tests without real AWS credentials**
-
-![SS21b: Earlier unit tests without real AWS credentials](evidence/SS21b.png)
-
-**SS22 — Final integration suite: ZIP 60616 miss, hit, history, and ten tests passed**
-
-![SS22: Final integration suite: ZIP 60616 miss, hit, history, and ten tests passed](evidence/SS22.png)
-
-**SS23 — Final deployment cleanup: all checked lab resources absent**
-
-![SS23: Final deployment cleanup: all checked lab resources absent](evidence/SS23.png)
