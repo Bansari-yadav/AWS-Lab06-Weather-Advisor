@@ -2,6 +2,213 @@
 
 Graduate cloud-computing lab built with Python/boto3, Node.js, Amazon EC2, an Application Load Balancer, Auto Scaling Groups, SSM Parameter Store, and private RDS PostgreSQL.
 
+<!-- navigation-start -->
+## Start here — Guide for the reviewer
+
+This repository documents **Bansari Yadav's ITMO 544 graduate implementation** of *Weather Advisor in the Cloud: Two Tiers, a Free AI Model and a PostgreSQL Database*. This README brings together the assignment sequence, source-code links, recorded results, required written answers, and all 26 screenshots.
+
+**Current status:** the deployed lab resources were deleted and the named-resource cleanup checks passed. The URLs in historical evidence are records of testing, not active demonstration links. Google AI Studio key deletion/restriction still needs confirmation.
+
+### Contents
+
+1. [Project structure](#project-structure)
+2. [Assignment walkthrough — Parts 0 through H](#assignment-walkthrough)
+3. [Graduate implementation and testing — Section 16.2](#graduate-checklist)
+4. [Submission checklist — Section 16.1](#submission-map)
+5. [Recorded results](#recorded-results)
+6. [Required questions and written answers](#required-questions-and-written-answers)
+7. [Experiment explanations](#parts-a-and-h--experiment-questions-and-explanations)
+8. [Three required paragraphs](#section-161--three-required-written-paragraphs)
+9. [All 13 security/privacy review Q&As](#section-151--security-and-privacy-review-13-questions-and-answers)
+10. [Graduate short answers](#section-162--graduate-short-answers)
+11. [Screenshot gallery](#screenshot-evidence)
+
+<a id="project-structure"></a>
+## Project structure
+
+The tree below highlights the current lab and the inherited lab05 material. The linked source files are the implementation; the evidence folder contains outputs and screenshots from actual runs.
+
+```text
+lab06/
+├── README.md                         # Walkthrough, Q&A, results, screenshots
+├── .env.example                      # Configuration template without secrets
+├── .gitignore                        # Excludes private settings and dependencies
+├── requirements.txt                  # Python/boto3, pytest, and moto dependencies
+├── pytest.ini                        # Unit/integration/chaos test selection
+├── create_database.py                # Graduate Part E: create RDS dependencies and DB
+├── delete_database.py                # Delete DB without final snapshot/backups
+├── create_weather_stack.py           # Graduate Part F: create both application tiers
+├── delete_weather_stack.py           # Delete application infrastructure
+├── store_gemini_key.py                # Hidden key input and SSM storage
+├── test_gemini_key.py                 # Gemini API connectivity check
+├── collect_readonly_evidence.py       # History, cache, IAM, network evidence
+├── experiment_database_failure.py    # H7: block and restore DB connectivity
+├── experiment_gemini_failure.py       # H8: invalid-key fallback and restoration
+├── experiment_weather_recovery.py    # H9: replacement and recovery measurement
+├── cleanup_remaining.py              # Remove secret copy and temporary SSH rule
+├── verify_cleanup.py                 # Verify named lab resources are absent
+├── weather-app/
+│   ├── app.js                        # ZIP/NWS requests, PostgreSQL cache/history
+│   ├── package.json
+│   └── package-lock.json
+├── advisor-app/
+│   ├── app.js                        # Weather dependency, Gemini, fallback, HTML
+│   ├── package.json
+│   └── package-lock.json
+├── stack/
+│   ├── clients.py                    # Shared boto3 clients
+│   ├── database.py                   # DB request construction and lifecycle
+│   ├── weather_config.py             # WeatherSettings configuration
+│   ├── weather_compute.py            # User-data and launch templates
+│   ├── weather_iam.py                # Roles and instance profiles
+│   ├── weather_policies.py           # Exact-secret IAM policies
+│   ├── weather_runner.py             # Create/delete orchestration
+│   └── ...                           # Reused lab05 network/ALB/ASG helpers
+├── testing/
+│   ├── app_smoke_test.py              # Nine checks, callable from pytest
+│   └── ...                           # Inherited testing helpers
+├── tests/
+│   ├── unit/                         # Mocked tests, including weather DB/stack
+│   ├── integration/
+│   │   └── test_weather_live.py       # Current lab's real-stack tests
+│   ├── chaos/
+│   │   └── test_weather_chaos.py      # DB failure and instance replacement
+│   └── ...                           # Shared fixtures and inherited lab05 tests
+├── evidence/
+│   ├── A1_*, A2_*, C2_*, C3_*        # API exploration and secret metadata
+│   ├── E*, F*, G*, H*                # Deployment and experiment outputs
+│   ├── final_revision_*.txt          # Final tests and cleanup verification
+│   ├── graduate_chaos_tests.txt      # Marked chaos-suite result
+│   └── SS1.png ... SS23.png          # 26 images; some labels have a/b versions
+└── previous/                         # Archived uploader/viewer and entry scripts
+```
+
+The local `.env`, virtual environment, and installed Node dependencies are excluded from Git. The archived `previous/` applications and inherited lab05 modules/tests explain the project's starting point; the weather-specific modules and tests above implement this assignment.
+
+**Open the main folders:** [infrastructure](stack/) · [weather app](weather-app/) · [advisor app](advisor-app/) · [tests](tests/) · [evidence](evidence/) · [configuration example](.env.example).
+
+<a id="assignment-walkthrough"></a>
+## Assignment walkthrough — Parts 0 through H
+
+This is arranged in the professor's assignment order. Infrastructure was implemented in **Python/boto3**, as required for ITMO 544, while the two applications use Node.js. Mocked tests were run before cloud deployment, and live experiments were followed by cleanup. A later deployment verified the final configuration changes and the explicit ZIP 60616 integration requirement, then was also removed. Earlier and final evidence therefore represent separate runs.
+
+### Part 0 — Prepare lab06 from lab05
+
+I worked in a separate `lab06` copy, retained the Python `stack/` package and pytest setup, and moved the old uploader/viewer applications and their entry scripts into `previous/`. I removed old application settings and checked that region, availability zones, AMI, instance type, key-pair name, and app security-group settings remained.
+
+**Review:** [archived previous applications](previous/) · [folder listing, first 40 lines](evidence/Part0_folder_layout_first40.txt) · [full folder listing](evidence/Part0_folder_layout_full.txt) · [SS21a](evidence/SS21a.png). The listing was collected using a Windows/Python equivalent of the PDF's bash command.
+
+### Part A — Call the ZIP and NWS APIs manually
+
+I looked up ZIP 60616 and checked that ZIP 00000 returned 404. I called the NWS points endpoint with an identifying User-Agent, extracted its forecast URL, and requested the first forecast period. This established the response fields and error handling before using them in the weather service. A fresh application lookup uses ZIP-to-coordinates, NWS points, and NWS forecast requests: three HTTP requests across two providers.
+
+**Review:** [60616 ZIP response](evidence/A1_zip_60616.txt) · [00000 status](evidence/A1_zip_00000.txt) · [NWS points JSON](evidence/A2_nws_points_full.json) · [forecast URL](evidence/A2_forecast_url.txt) · [first period](evidence/A2_first_forecast_period.txt) · [SS1](evidence/SS1.png), [SS2](evidence/SS2.png), [SS3](evidence/SS3.png). The written API explanation appears below.
+
+### Part B — Configure names, ports, and cache settings
+
+I added weather/advisor resource names, listener ports 8080 and 8081, app port 3000, PostgreSQL port 5432, database settings, and parameter names. The forecast cache uses 600 seconds and the Gemini key cache uses 60 seconds. The Python settings module reads configuration rather than embedding deployment identifiers in resource-building functions.
+
+**Review:** [sanitized configuration template](.env.example) · [WeatherSettings](stack/weather_config.py). Real secret values are not included in that template.
+
+### Part C — Test Gemini and store its key securely
+
+I created a Gemini key, tested a model request, and supplied the key through hidden input to the Python storage helper. The helper stored and verified a Standard SSM SecureString without printing its value. The published evidence records API results and parameter metadata.
+
+**Review:** [key storage helper](store_gemini_key.py) · [API test helper](test_gemini_key.py) · [Gemini test result](evidence/C2_gemini_test.json) · [SSM metadata](evidence/C3_ssm_parameter_metadata.json) · [SS4](evidence/SS4.png).
+
+### Part D — Build the weather and advisor applications
+
+The weather service validates ZIP input, looks up coordinates and NWS forecasts, and provides `/weather` and `/history`. It uses parameterized PostgreSQL queries for forecast cache/history and a trusted RDS certificate bundle for its TLS connection. The advisor calls weather through the ALB, requests Gemini clothing advice, returns a labelled rule-based fallback if Gemini fails, and HTML-escapes page content. Both application files passed syntax checks and their dependencies were installed before local checks and deployment.
+
+**Review:** [weather application](weather-app/app.js) · [weather dependencies](weather-app/package.json) · [advisor application](advisor-app/app.js) · [advisor dependencies](advisor-app/package.json). Deployed behavior is demonstrated in Parts G and H.
+
+### Part E — Implement and create the private PostgreSQL database
+
+I implemented the Python equivalent of database creation/deletion, including the DB security group, app-group-only ingress, two-AZ subnet group, random password in SSM, and output handling. Mocked tests checked settings, repeated creation/deletion, restricted ingress, and secret handling before creating the live DB.
+
+The live database was PostgreSQL on `db.t4g.micro`, with 20 GB encrypted storage, single-AZ placement, public access disabled, and backup retention 0. The delete request skips a final snapshot and removes automated backups.
+
+**Review:** [create entry point](create_database.py) · [delete entry point](delete_database.py) · [database helpers](stack/database.py) · [database unit tests](tests/unit/test_weather_database.py) · [creation output](evidence/E2_database_creation.txt) · [live DB settings](evidence/H4_database_verification.json) · [SS5](evidence/SS5.png), [SS8](evidence/SS8.png), [SS9](evidence/SS9.png).
+
+### Part F — Implement and create the two-tier application stack
+
+I added separate weather/advisor IAM roles and profiles. Each role may read only its own exact secret ARN. The runner prepares network access and target groups, ensures the ALB and listeners exist before building launch templates, then creates each Auto Scaling Group. Weather startup receives the DB endpoint; advisor startup receives the ALB DNS name. Secret values are not embedded in either startup script. Mocked tests cover ordering, policy separation, repeat creation, cleanup, and the 16 KB user-data limit.
+
+**Review:** [create entry point](create_weather_stack.py) · [delete entry point](delete_weather_stack.py) · [stack orchestration](stack/weather_runner.py) · [IAM helpers](stack/weather_iam.py) · [policies](stack/weather_policies.py) · [startup and launch templates](stack/weather_compute.py) · [stack unit tests](tests/unit/test_weather_stack.py) · [SS6](evidence/SS6.png).
+
+### Part G — Deploy and test both services
+
+After the database was available, I ran the stack creation script and waited for both target groups to become healthy. I opened the deployed advisor page for ZIP 60616 and collected JSON for the same ZIP. The smoke test checked weather success, cache hit, saved history, invalid/unknown ZIP handling, advisor advice, Gemini source, advisor ZIP validation, and the homepage.
+
+**Recorded outcome:** all nine smoke checks passed. The final live integration run also explicitly showed 60616 miss, then hit, and a matching history entry; all ten integration tests passed in 27.35 seconds.
+
+**Review:** [stack creation output](evidence/G1_stack_creation.txt) · [target health](evidence/G1_target_health.json) · [60616 advice JSON](evidence/G2_advice_60616.json) · [nine-check output](evidence/G3_smoke_test.txt) · [smoke-test code](testing/app_smoke_test.py) · [final integration output](evidence/final_revision_integration_tests.txt) · [SS10](evidence/SS10.png), [SS11](evidence/SS11.png), [SS22](evidence/SS22.png). The page screenshot and JSON are separate requests for the same ZIP, so generated wording can differ.
+
+### Part H — Run the ten experiments
+
+| Step | What I did and observed | Evidence |
+|---|---|---|
+| **H1: Service logs** | Requested forecasts and inspected structured weather logs. One 60616 hit took 2 ms; the preceding miss took 156 ms. | [Journal](evidence/H1_weather_journal.txt), [SS12](evidence/SS12.png) |
+| **H2: Stored data** | Requested history and queried PostgreSQL from weather with verified TLS. The SQL screenshot recorded five saved rows at that point. | [History](evidence/H2_history.json), [SQL screenshot SS13](evidence/SS13.png) |
+| **H3: Cache timing** | Requested unused ZIP 98101 twice. Miss: 0.182 s; hit: 0.067 s. | [Timing JSON](evidence/H3_cache_timings.json) |
+| **H4: DB exposure/backups** | Checked RDS properties and backup lists, then attempted a local DB connection. Retention was 0, snapshots/backups were empty, the DB was private/single-AZ/encrypted, and the external connection timed out. | [Properties](evidence/H4_database_verification.json), [external connection](evidence/H4_external_connection.json), [SS9](evidence/SS9.png) |
+| **H5: Secret permissions** | Simulated both roles against both secrets. Each role was allowed only its own parameter and implicitly denied the other. | [Four decisions](evidence/H5_iam_simulation.json) |
+| **H6: ALB-only app access** | Tried both instances directly on app port 3000 and through their ALB listeners. Direct access timed out; both ALB requests returned 200. | [Network results](evidence/H6_network_isolation.json) |
+| **H7: Database failure** | Temporarily removed DB access, restarted weather, captured 200 with cache unavailable, history 503, and a DB error log, then restored access and checked recovery. | [Failure/restoration](evidence/H7_database_failure.json), [SS14](evidence/SS14.png), [experiment code](experiment_database_failure.py) |
+| **H8: Gemini failure** | Temporarily stored an invalid key and waited for key-cache expiry. Three responses used fallback; logs showed Gemini HTTP 400. Restored the real key and passed the smoke test. | [Fallback responses](evidence/H8_fallback_answers.json), [restored checks](evidence/H8_restored_smoke_test.txt), [SS15](evidence/SS15.png), [SS16a](evidence/SS16a.png), [SS16b](evidence/SS16b.png), [experiment code](experiment_gemini_failure.py) |
+| **H9: Instance failure** | Terminated weather through its ASG without reducing desired capacity. Advisor advice returned 502 while its homepage remained 200. Recovery took 80.3 s in the initial experiment and 77.7 s in the separate chaos run; saved cache state survived in RDS. | [Recovery record](evidence/H9_weather_recovery.json), [SS17a](evidence/SS17a.png), [SS17b](evidence/SS17b.png), [SS19](evidence/SS19.png), [experiment code](experiment_weather_recovery.py) |
+| **H10: Cleanup** | Removed app instances and ALB, deleted the DB without a final snapshot/retained backups, completed dependency cleanup, removed secret parameters and the temporary SSH rule, then verified named resources absent. | [Final verification](evidence/final_revision_cleanup_verification.txt), [SS23](evidence/SS23.png), [cleanup verification code](verify_cleanup.py) |
+
+The paragraphs below explain the logs, row count, cache policy, IAM boundary, security-group sources, retry pause, fallback weakness, and state placement. Cleanup encountered asynchronous AWS dependency delays; final verification, rather than an earlier failed delete attempt, is the evidence that removal completed. The actual Google AI Studio key is separate from its deleted SSM copy.
+
+<a id="graduate-checklist"></a>
+## Graduate implementation and testing — Section 16.2
+
+| Graduate requirement | Implementation and recorded proof |
+|---|---|
+| Python/boto3 infrastructure built on lab05 | Four Python entry points and reusable [stack package](stack/); Node.js remains the application language. |
+| Required database settings and deletion flags | [DB helpers](stack/database.py), [DB tests](tests/unit/test_weather_database.py), [live settings](evidence/H4_database_verification.json), [final cleanup](evidence/final_revision_cleanup_verification.txt). |
+| ALB before launch templates; correct startup addresses | [Runner](stack/weather_runner.py), [startup builder](stack/weather_compute.py), [ordering/startup tests](tests/unit/test_weather_stack.py). |
+| Separate exact-secret roles and no startup secret values | [Policies](stack/weather_policies.py), [IAM helpers](stack/weather_iam.py), [live IAM simulation](evidence/H5_iam_simulation.json). |
+| Configuration, idempotency, user-data size, and error handling | [Settings](stack/weather_config.py), DB and stack unit tests. Weather-specific helpers extend the inherited code. |
+| Unit tests with no real credentials | [Final no-credentials output: 31 passed](evidence/final_unit_tests_without_credentials.txt); [final revision output](evidence/final_revision_unit_tests.txt). Earlier screenshots record the earlier 30-test suite. |
+| Real tests marked integration | [Current integration test](tests/integration/test_weather_live.py), [final result: 10 passed](evidence/final_revision_integration_tests.txt), [SS22](evidence/SS22.png). Covers exact 60616 sequence, history, errors, advice, network boundaries, and four IAM decisions. |
+| Real tests marked chaos | [Chaos tests](tests/chaos/test_weather_chaos.py), [result: 2 passed](evidence/graduate_chaos_tests.txt), [SS19](evidence/SS19.png). Covers DB failure/restoration and recovery within 300 seconds. |
+| Smoke test usable through pytest | [Nine-check helper](testing/app_smoke_test.py), called by the current live integration suite. |
+| Half-page moto limitations and one-paragraph Python/bash comparison | Both answers appear under **Section 16.2 — Graduate short answers** below. |
+
+The final 60616/configuration follow-up was redeployed and passed the ten live integration tests before its cleanup. The marked chaos results are from the earlier separate experiment run.
+
+<a id="submission-map"></a>
+## Submission checklist — Section 16.1
+
+This table follows the professor's 18 shared checklist items. The ITMO 544 additions are mapped immediately above.
+
+| PDF item | Where to review it in this README/repository |
+|---|---|
+| 1. Folder layout | Project structure; Part 0; [saved listing](evidence/Part0_folder_layout_first40.txt). |
+| 2. NWS output and API explanation | Part A; Part A written answer; SS1–SS3. |
+| 3. Database creation and required settings | Part E; H4; [creation output](evidence/E2_database_creation.txt), [live properties](evidence/H4_database_verification.json). |
+| 4. Advisor page plus same-ZIP JSON | Part G; SS11; [60616 JSON](evidence/G2_advice_60616.json). |
+| 5. Nine passing smoke checks | Part G; SS10; [smoke output](evidence/G3_smoke_test.txt). |
+| 6. H1 journal and explanation | H1 experiment row; H1 written answer; SS12. |
+| 7. H2 history and SQL | H2 experiment row; H2 written answer; SS13. |
+| 8. H3 timings and two sentences | H3 experiment row; H3 written answer. |
+| 9. H5 IAM decisions and advisor-compromise sentence | H5 experiment row; H5 written answer. |
+| 10. H6 direct/ALB results and SG-source explanation | H6 experiment row; H6 written answer. |
+| 11. H7 DB failure, log, and retry explanation | H7 experiment row; H7 written answer; SS14. |
+| 12. H8 fallback, logs, and silent-failure explanation | H8 experiment row; H8 written answer; SS15/SS16a/SS16b. |
+| 13. H9 recovery, advisor outage, and state explanation | H9 experiment row; H9 written answer; SS17a/SS17b/SS19. |
+| 14. SSM paragraph | Section 16.1 — Three required written paragraphs: **Why secrets belong in SSM**. |
+| 15. Backups paragraph | Same section: **Why backups were disabled for this lab**. |
+| 16. Gemini data-sharing paragraph | Same section: **Data shared with Gemini**. |
+| 17. All Section 15.1 review answers | Section 15.1 — Security and privacy review: **Questions 1–13**. |
+| 18. Final deletion verification | H10; final validation section; [all-empty output](evidence/final_revision_cleanup_verification.txt); SS23. |
+
+[Return to reviewer guide](#start-here--guide-for-the-reviewer)
+
+<!-- navigation-end -->
+
 ## Report and evidence
 
 - [Screenshots and saved outputs](evidence/)
