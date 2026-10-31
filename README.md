@@ -17,10 +17,10 @@ This repository documents **Bansari Yadav's ITMO 544 graduate implementation** o
 4. [Submission checklist - Section 16.1](#submission-map)
 5. [Recorded results](#recorded-results)
 6. [Required questions and written answers](#required-questions-and-written-answers)
-7. [Experiment explanations](#parts-a-and-h--experiment-questions-and-explanations)
-8. [Three required paragraphs](#section-161--three-required-written-paragraphs)
-9. [All 13 security/privacy review Q&As](#section-151--security-and-privacy-review-13-questions-and-answers)
-10. [Graduate short answers](#section-162--graduate-short-answers)
+7. [Experiment explanations](#parts-a-and-h---experiment-questions-and-explanations)
+8. [Three required paragraphs](#section-161---three-required-written-paragraphs)
+9. [All 13 security/privacy review Q&As](#section-151---security-and-privacy-review-13-questions-and-answers)
+10. [Graduate short answers](#section-162---graduate-short-answers)
 11. Screenshots are embedded alongside the assignment steps below.
 
 <a id="project-structure"></a>
@@ -370,7 +370,7 @@ This table follows the professor's 18 shared checklist items. The ITMO 544 addit
 | 17. All Section 15.1 review answers | Section 15.1 - Security and privacy review: **Questions 1-13**. |
 | 18. Final deletion verification | H10; final validation section; [all-empty output](evidence/final_revision_cleanup_verification.txt); SS23. |
 
-[Return to reviewer guide](#start-here--guide-for-the-reviewer)
+[Return to reviewer guide](#start-here---guide-for-the-reviewer)
 
 <!-- navigation-end -->
 
