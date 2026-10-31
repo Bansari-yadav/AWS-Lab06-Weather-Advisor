@@ -1,0 +1,16 @@
+DatabaseInstances: []
+DatabaseSnapshots: []
+AutomatedBackups: []
+DatabaseSubnetGroups: []
+LoadBalancers: []
+TargetGroups: []
+AutoScalingGroups: []
+LaunchTemplates: []
+LabRoles: []
+InstanceProfiles: []
+SecretParameters: []
+LabSecurityGroups: []
+NonterminatedLabInstances: []
+TemporaryBrowserSSHRule: []
+
+VERIFIED: all listed lab resources are absent.

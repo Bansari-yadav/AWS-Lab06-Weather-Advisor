@@ -1,0 +1,15 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.3, pytest-9.2.0, pluggy-1.7.0
+rootdir: D:\Work - 2026\python\lab06
+configfile: pytest.ini
+testpaths: tests
+collected 59 items / 28 deselected / 31 selected
+
+tests\unit\test_config.py ....                                           [ 12%]
+tests\unit\test_policies.py ....                                         [ 25%]
+tests\unit\test_stack_with_moto.py .......                               [ 48%]
+tests\unit\test_user_data.py ....                                        [ 61%]
+tests\unit\test_weather_database.py .......                              [ 83%]
+tests\unit\test_weather_stack.py .....                                   [100%]
+
+===================== 31 passed, 28 deselected in 51.63s ======================

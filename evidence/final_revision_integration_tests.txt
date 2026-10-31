@@ -1,0 +1,36 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.3, pytest-9.2.0, pluggy-1.7.0 -- D:\Work - 2026\python\lab06\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: D:\Work - 2026\python\lab06
+configfile: pytest.ini
+collecting ... collected 10 items
+
+tests/integration/test_weather_live.py::test_both_target_groups_healthy PASSED
+tests/integration/test_weather_live.py::test_forecast_miss_then_hit_and_history 60616 first uncached request: miss
+60616 repeat request: hit
+History contains 60616: PASS
+PASSED
+tests/integration/test_weather_live.py::test_weather_error_statuses[abc-400] PASSED
+tests/integration/test_weather_live.py::test_weather_error_statuses[00000-404] PASSED
+tests/integration/test_weather_live.py::test_all_nine_smoke_checks PASS: weather returns a forecast HTTP 200
+PASS: repeat request is a cache hit HTTP 200
+PASS: history contains saved lookups HTTP 200
+PASS: weather rejects invalid ZIP HTTP 400
+PASS: weather rejects unknown ZIP HTTP 404
+PASS: advisor returns advice HTTP 200
+PASS: advice comes from Gemini 
+Source: gemini
+Advice: Wear a light jacket or a warm sweater since it is cool outside. You will be comfortable in long pants and closed shoes.
+PASS: advisor rejects invalid ZIP HTTP 400
+PASS: advisor homepage loads HTTP 200
+
+9 of 9 checks passed
+Advisor page: http://itmo-444-544-weather-alb-1888710696.us-east-2.elb.amazonaws.com:8081/
+PASSED
+tests/integration/test_weather_live.py::test_application_access_only_through_alb[weather] PASSED
+tests/integration/test_weather_live.py::test_application_access_only_through_alb[advisor] PASSED
+tests/integration/test_weather_live.py::test_database_port_unreachable_from_computer PASSED
+tests/integration/test_weather_live.py::test_each_role_reads_only_its_own_secret PASSED
+tests/integration/test_weather_live.py::test_database_tls_and_backup_configuration PASSED
+
+============================= 10 passed in 27.35s =============================
