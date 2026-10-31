@@ -90,7 +90,7 @@ The local `.env`, virtual environment, and installed Node dependencies are exclu
 <a id="assignment-walkthrough"></a>
 ## Assignment walkthrough — Parts 0 through H
 
-This is arranged in the professor's assignment order. Infrastructure was implemented in **Python/boto3**, as required for ITMO 544, while the two applications use Node.js. Mocked tests were run before cloud deployment, and live experiments were followed by cleanup. A later deployment verified the final configuration changes and the explicit ZIP 60616 integration requirement, then was also removed. Earlier and final evidence therefore represent separate runs.
+The nfrastructure was implemented in **Python/boto3**, as required for ITMO 544, while the two applications use Node.js. Mocked tests were run before cloud deployment, and live experiments were followed by cleanup. A later deployment verified the final configuration changes and the explicit ZIP 60616 integration requirement, then was also removed. Earlier and final evidence therefore represent separate runs.
 
 ### Part 0 — Prepare lab06 from lab05
 
